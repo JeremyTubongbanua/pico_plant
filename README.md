@@ -1,6 +1,6 @@
 
 
-# pico_plant
+# pico_wavi
 
 Pico W plant monitor displaying data on a wavi page using the atPlatform
 
