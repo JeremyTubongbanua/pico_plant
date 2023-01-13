@@ -2,7 +2,7 @@
 
 # pico_wavi
 
-Pico W plant monitor displaying data on a wavi page using the atPlatform
+Pico W sensors displaying data on a wavi page using the atPlatform
 
 ## Resources
 
