@@ -21,7 +21,7 @@ def main():
     key_temperature = const('custom_temperature')
     key_humidity = const('custom_humidity')
     key_water_level = const('custom_water_level')
-    key_timestamp = const('timestamp')
+    key_timestamp = const('custom_timestamp')
     namespace_wavi = const('wavi')
     del const
 
@@ -40,10 +40,10 @@ def main():
         print('Water Level: %s' % str_humidity)
         print('Timestamp: %s' % str_timestamp)
 
-        atClient.put_public(key_temperature, str_temperature, namespace=namespace_wavi)
-        atClient.put_public(key_humidity, str_humidity, namespace=namespace_wavi)
-        atClient.put_public(key_water_level, str_water_level, namespace=namespace_wavi)
-        atClient.put_public(key_timestamp, str_timestamp)
+        atClient.put_public(key_temperature, construct_wavi_item(key_temperature, str_temperature), namespace=namespace_wavi)
+        atClient.put_public(key_humidity, construct_wavi_item(key_humidity, str_humidity), namespace=namespace_wavi)
+        atClient.put_public(key_water_level, construct_wavi_item(key_water_level, str_water_level), namespace=namespace_wavi)
+        atClient.put_public(key_timestamp, construct_wavi_item(key_timestamp, str_timestamp), namespace=namespace_wavi)
 
 def get_temperature_and_humidity():
     from dht11 import DHT11
@@ -75,6 +75,17 @@ def get_current_timestamp():
     timestamp = time()
     del time
     return timestamp
+
+def construct_wavi_item(key, value):
+    # {
+    #     "label": "Description",
+    #     "category": "DETAILS",
+    #     "type": "Text",
+    #     "value": "Welcome and thank you for checking out this @wavi page! This is not a real coffee thing, it’s a demo of the atPlatform’s IoT capabilities. It demonstrates a Pico W sending sensor readings while connected to an atServer. Enjoy! 💜\n\nThe Raspberry Pi Pico W is connected to sensors using a breadboard. The Pico reads the sensor values then is sent to an atServer which is ultimately displayed on the @Wavi page you’re looking at right now. The Pico is able to do all the necessary encryption to PKAM authenticate into the atServer. 👾💻",
+    #     "valueDescription": "",
+    #     "valueLabel": ""
+    # }
+    return '{"label": "%s", "category": "DETAILS", "type": "Text", "value": "%s", "valueDescription": "", "valueLabel": ""}' % (key, value)
 
 if __name__ == '__main__':
     main()
