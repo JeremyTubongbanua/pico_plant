@@ -40,10 +40,10 @@ def main():
         print('Water Level: %s' % str_humidity)
         print('Timestamp: %s' % str_timestamp)
 
-        atClient.put_public(key_temperature, construct_wavi_item(key_temperature, str_temperature), namespace=namespace_wavi)
-        atClient.put_public(key_humidity, construct_wavi_item(key_humidity, str_humidity), namespace=namespace_wavi)
-        atClient.put_public(key_water_level, construct_wavi_item(key_water_level, str_water_level), namespace=namespace_wavi)
-        atClient.put_public(key_timestamp, construct_wavi_item(key_timestamp, str_timestamp), namespace=namespace_wavi)
+        atClient.put_public(key_temperature, construct_wavi_item('Temperature', str_temperature), namespace=namespace_wavi)
+        atClient.put_public(key_humidity, construct_wavi_item('Humidity', str_humidity), namespace=namespace_wavi)
+        atClient.put_public(key_water_level, construct_wavi_item('Water Level', str_water_level), namespace=namespace_wavi)
+        atClient.put_public(key_timestamp, construct_wavi_item('Timestamp', str_timestamp), namespace=namespace_wavi)
 
 def get_temperature_and_humidity():
     from dht11 import DHT11
